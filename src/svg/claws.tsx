@@ -1,11 +1,12 @@
 import { h } from "preact";
 
 const Claws = (props: IPropTypes) => {
-	const { colour } = props,
-		clawColour = colour !== null ? colour : "#fff3e6";
+	const { colour, holdCard } = props,
+		clawColour = colour !== null ? colour : "#fff3e6",
+		translateY = holdCard != 0 ? '-9rem' : '-3rem';
 
 	return (
-		<g id="claws" style={{ transform: "translate3d(0, -2rem, 0)" }}>
+		<g id="claws" style={{ transform: `translate3d(0, ${translateY}, 0)` }}>
 			<path
 				fill={clawColour}
 				d="M159.301 240.538c-.277-.021-.545.17-.685.418a.423.423 0 00-.159.255c-.063.307.006.551.014.852.006.33 0 .645.096.961.013.039.035.065.053.099.005.035.003.069.011.104.095.475.877.484.963 0 .013-.067.019-.141.027-.211.007-.031.021-.058.022-.094.019-.557.783-2.303-.342-2.384z"
