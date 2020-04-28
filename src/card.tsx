@@ -1,12 +1,18 @@
 import { h } from "preact";
+import { useContext } from "preact/hooks";
 import styled from "styled-components";
+import { GameContext } from ".";
 
 function Card(props) {
-	const { id, type, marginTop } = props;
+	const [context] = useContext(GameContext),
+		{ config } = context,
+		{ id, type, marginTop } = props;
+
+	const matching = (config.matching === type ? 'matching' : '');
 
 	return id != 0 ? (
-		<Frame className={`${type}-card card-${id}`} style={{ 'margin-top': marginTop }}>
-			<Text>{type}<br />card #{id}</Text>
+		<Frame className={`${type}-card card-${id} ${matching}`} style={{ 'margin-top': marginTop }}>
+			<Text>{type}<br />card {matching === 'matching' ? '*' : '#'}{id}</Text>
 		</Frame>
 	) : null;
 }
