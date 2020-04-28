@@ -10,10 +10,10 @@ import { setRandomNumberByRange, useInterval } from "./_utils";
 const Mole = (props: IProps) => {
 	const [isActive, setActiveState] = useState(false),
 		[isHit, setHitState] = useState(false),
-		[delay, setDelay] = useState(setRandomNumberByRange(1500, 3000)),
 		[isRunning, setIsRunning] = useState(true),
 		[context] = useContext(GameContext),
-		{ timeRemaining, playerScore, updateScore, setCountdownState, isMuted } = context,
+		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted } = context,
+		[delay, setDelay] = useState(setRandomNumberByRange(config.moleDelayLow, config.moleDelayHigh)),
 		{ id, time } = props;
 
 	useInterval(
@@ -64,10 +64,14 @@ const Mole = (props: IProps) => {
 			setActiveState(false);
 
 			// For each successful whack, make this mole faster
-			const newDelay = 1 - 0.015 * playerScore;
+			const newDelay = 1 - config.moleSpeedUp * playerScore;
+
+			// Make the first delayed values similar to the original ones
+			const baseDelayLow = config.moleDelayLow / (1 - config.moleSpeedUp);
+			const baseDelayHigh = config.moleDelayHigh / (1 - config.moleSpeedUp);
 
 			// Update time taken for mole to re-appear
-			setDelay(setRandomNumberByRange(1800 * newDelay, 3300 * newDelay));
+			setDelay(setRandomNumberByRange(baseDelayLow * newDelay, baseDelayHigh * newDelay));
 		}
 	}
 

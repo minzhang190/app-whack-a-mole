@@ -8,13 +8,13 @@ import TitleScreen from "./title-screen";
 import { defaultContext, IContext, localStorageAvailable } from "./_utils";
 
 export const GameContext = createContext<[IContext]>([defaultContext]);
-export const gameLength = 20;
 const prevMutedPreference = localStorageAvailable() ? (localStorage.getItem("ismute") === "true" ? true : false) : false;
 
-function Game() {
+function Game(props) {
 	// Set our states
-	const [showTitleScreen, disableTitleScreen] = useState(true),
-		[timeRemaining, countdown] = useState(gameLength),
+	const [config, setConfig] = useState(props.config),
+		[showTitleScreen, disableTitleScreen] = useState(true),
+		[timeRemaining, countdown] = useState(config.gameLength),
 		[playerScore, updateScore] = useState(0),
 		[playerHighScore, updateHighScore] = useState(0),
 		[isCountdownActive, setCountdownState] = useState(false),
@@ -30,6 +30,7 @@ function Game() {
 		<GameContext.Provider
 			value={[
 				{
+					config,
 					countdown,
 					disableTitleScreen,
 					isCountdownActive,
@@ -89,7 +90,12 @@ if (loader) {
 
 // Render our app
 const rootElement = document.getElementById("app");
-render(<Game />, rootElement as Element);
+render(<Game config={{
+	gameLength: 20,
+	moleDelayLow: 1500,
+	moleDelayHigh: 1800,
+	moleSpeedUp: 0.015
+}} />, rootElement as Element);
 
 // Register service worker (not on dev/serve)
 if (process.env.NODE_ENV !== "development") {

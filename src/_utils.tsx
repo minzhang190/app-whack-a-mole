@@ -46,6 +46,7 @@ interface ISavedCallback {
 }
 
 export interface IContext {
+	config: Object;
 	countdown: Function;
 	disableTitleScreen: Function;
 	isCountdownActive: boolean;
@@ -66,6 +67,7 @@ export interface IContext {
 }
 
 export const defaultContext: IContext = {
+	config: {},
 	countdown: () => {
 		return;
 	},

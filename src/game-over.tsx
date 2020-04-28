@@ -2,7 +2,7 @@ import { h } from "preact";
 import { useContext } from "preact/hooks";
 import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { GameContext, gameLength } from ".";
+import { GameContext } from ".";
 import Button from "./button";
 import { ILetter, Letter, Word } from "./title-screen";
 import { setRandomNumberByRange } from "./_utils";
@@ -10,6 +10,7 @@ import { setRandomNumberByRange } from "./_utils";
 const GameOver = () => {
 	const [context] = useContext(GameContext),
 		{
+			config,
 			playerScore,
 			updateScore,
 			setGameOverState,
@@ -107,7 +108,7 @@ const GameOver = () => {
 					setGameOverState(false);
 					setHighScoreState(false);
 					setFirstPlayState(false);
-					countdown(gameLength);
+					countdown(config.gameLength);
 
 					// Play replay audio
 					if (!isMuted) {
