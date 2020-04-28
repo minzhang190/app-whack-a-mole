@@ -1,7 +1,7 @@
 import { Fragment, h } from "preact";
 import styled from "styled-components";
 import Clock from "./clock";
-import Mole from "./mole";
+import { Mole } from "./mole";
 import Target from "./target";
 import { Scoreboard } from "./scoreboard";
 

@@ -2,6 +2,7 @@ import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
 import { useEffect } from "react";
 import styled from "styled-components";
+import Card from "./card";
 import Bow from "./svg/bow";
 import Claws from "./svg/claws";
 import Eyes from "./svg/eyes";
@@ -64,24 +65,12 @@ const MoleSprite = (props: IHitState) => {
 				<FacialHair isFemale={isFemale} tashNum={tashNum} />
 				<Mouth isHit={isHit} isFemale={isFemale} mouth={mouth} hitMouth={hitMouth} />
 			</svg>
-			{holdCard !== 0 ? <MoleCard className={`mole-card card-${holdCard}`} /> : null}
+			<Card type="mole" id={holdCard} marginTop="48%" />
 			<svg xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute" }} viewBox="0 0 195 335">
 				<Claws colour={colour} holdCard={holdCard} />
 			</svg>
 		</Fragment>
 	);
 };
-
-const MoleCard = styled.div`
-	position: absolute;
-	width: 92%;
-	left: 4%;
-	padding-top: 69%;
-	margin-top: 48%;
-	box-sizing: border-box;
-	border: .4rem solid black;
-	background: white top/80% no-repeat;
-	background-image: url(https://avatars2.githubusercontent.com/u/26872990);
-`;
 
 export default MoleSprite;

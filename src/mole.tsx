@@ -7,7 +7,7 @@ import Stars from "./stars";
 import Molehill from "./svg/molehill";
 import { setRandomNumberByRange, useInterval } from "./_utils";
 
-const Mole = (props: IProps) => {
+export const Mole = (props: IProps) => {
 	const [isActive, setActiveState] = useState(false),
 		[isHit, setHitState] = useState(false),
 		[isRunning, setIsRunning] = useState(true),
@@ -107,7 +107,7 @@ const Mole = (props: IProps) => {
 	);
 };
 
-const MoleLabel = styled.label`
+export const MoleLabel = styled.label`
 	height: 100%;
 	overflow: hidden;
 	padding: 0 5%;
@@ -149,7 +149,7 @@ const MoleBody = styled.div`
 	}
 `;
 
-const MolehillWrapper = styled.div`
+export const MolehillWrapper = styled.div`
 	bottom: 0;
 	left: -5%;
 	position: relative;
@@ -160,5 +160,3 @@ interface IProps {
 	id: string;
 	time: number;
 }
-
-export default Mole;
