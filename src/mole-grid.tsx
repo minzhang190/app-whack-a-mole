@@ -2,19 +2,23 @@ import { Fragment, h } from "preact";
 import styled from "styled-components";
 import Clock from "./clock";
 import Mole from "./mole";
+import Target from "./target";
 import { Scoreboard } from "./scoreboard";
 
-function MoleGrid() {
+function MoleGrid(props) {
+	const { columns } = props;
+
+	const cells = [...Array(columns * 3 - 1)].map((_, idx) =>
+		<Mole id={`mole-${idx + 1}`} time={idx / (columns * 3)} />
+	);
+	cells.splice(Math.floor((3 * columns - 1) / 2), 0, <Target time={1 - 1 / (columns * 3)}/>);
+
 	return (
 		<Fragment>
 			<Clock />
 			<Scoreboard />
-			<GridArea>
-				<Mole id="mole-1" time={0} />
-				<Mole id="mole-2" time={0.2} />
-				<Mole id="mole-3" time={0.4} />
-				<Mole id="mole-4" time={0.6} />
-				<Mole id="mole-5" time={0.8} />
+			<GridArea style={{ 'grid-template-columns': '1fr '.repeat(columns) }}>
+				{cells}
 			</GridArea>
 		</Fragment>
 	);
@@ -25,17 +29,11 @@ const GridArea = styled.main`
 	grid-column: 1 / span 2;
 	grid-gap: 5vh;
 	grid-row: 2;
-	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	height: 100%;
 	justify-self: center;
 	max-width: 1440px;
 	width: 100%;
-
-	*:nth-child(3) {
-		grid-column: 1 / span 2;
-		grid-row: 2;
-	}
 `;
 
 export default MoleGrid;

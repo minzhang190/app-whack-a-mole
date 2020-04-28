@@ -24,7 +24,7 @@ function Game(props) {
 		[isHighScore, setHighScoreState] = useState(false);
 
 	// Determine what to render
-	const output = showTitleScreen ? <TitleScreen /> : isGameOver ? <GameOver /> : <MoleGrid />;
+	const output = showTitleScreen ? <TitleScreen /> : isGameOver ? <GameOver /> : <MoleGrid columns={config.columns}/>;
 
 	return (
 		<GameContext.Provider
@@ -91,6 +91,7 @@ if (loader) {
 // Render our app
 const rootElement = document.getElementById("app");
 render(<Game config={{
+	columns: 2,
 	gameLength: 20,
 	moleDelayLow: 1500,
 	moleDelayHigh: 1800,
