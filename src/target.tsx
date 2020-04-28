@@ -1,14 +1,28 @@
 import { h } from "preact";
+import { useContext, useState } from "preact/hooks";
 import styled from "styled-components";
+import { GameContext } from ".";
 import Card from "./card";
-import { MoleLabel, MolehillWrapper } from "./mole";
+import { MoleLabel, MoleCheckbox, MolehillWrapper } from "./mole";
 import Molehill from "./svg/molehill";
 
 function Target(props) {
-	const { time } = props;
+	const [isActive, setActiveState] = useState(false),
+		[context] = useContext(GameContext),
+		{ timeRemaining } = context,
+		{ time } = props;
+
+	setTimeout(() => {
+		setActiveState(true);
+	}, (time + 1) * 1000);
+
+	if (timeRemaining === 0) {
+		setActiveState(false);
+	}
 
 	return (
 		<MoleLabel>
+			<MoleCheckbox type="checkbox" checked={!isActive} disabled />
 			<TargetWrapper>
 				<Card type="target" id={1} marginTop="10%" />
 			</TargetWrapper>
@@ -26,6 +40,15 @@ const TargetWrapper = styled.div`
 	min-width: 8rem;
 	overflow: hidden;
 	width: calc(15vw + 5rem);
+
+	input + & {
+		transform: translate3d(0, 0, 0);
+		transition: transform 150ms;
+	}
+
+	input:checked + & {
+		transform: translate3d(0, 100%, 0);
+	}
 `;
 
 export default Target;

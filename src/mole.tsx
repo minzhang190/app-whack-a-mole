@@ -114,7 +114,7 @@ export const MoleLabel = styled.label`
 	place-self: end center;
 `;
 
-const MoleCheckbox = styled.input`
+export const MoleCheckbox = styled.input`
 	opacity: 0;
 	position: absolute;
 	z-index: -1;
