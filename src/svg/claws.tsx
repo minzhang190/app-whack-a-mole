@@ -3,7 +3,7 @@ import { h } from "preact";
 const Claws = (props: IPropTypes) => {
 	const { colour, holdCard } = props,
 		clawColour = colour !== null ? colour : "#fff3e6",
-		translateY = holdCard != 0 ? '-9rem' : '-3rem';
+		translateY = holdCard ? '-9rem' : '-3rem';
 
 	return (
 		<g id="claws" style={{ transform: `translate3d(0, ${translateY}, 0)` }}>

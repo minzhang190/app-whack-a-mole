@@ -92,6 +92,7 @@ if (loader) {
 const rootElement = document.getElementById("app");
 render(<Game config={{
 	columns: 2,
+	range: 2,
 	matching: null,
 	gameLength: 20,
 	moleDelayLow: 1500,

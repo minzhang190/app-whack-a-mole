@@ -1,7 +1,8 @@
 import { Fragment, h } from "preact";
-import { useState } from "preact/hooks";
+import { useContext, useState } from "preact/hooks";
 import { useEffect } from "react";
 import styled from "styled-components";
+import { GameContext } from ".";
 import Card from "./card";
 import Bow from "./svg/bow";
 import Claws from "./svg/claws";
@@ -12,7 +13,9 @@ import Mouth from "./svg/mouth";
 import { IHitState, setRandomNumberByRange } from "./_utils";
 
 const MoleSprite = (props: IHitState) => {
-	const { isHit } = props,
+	const [context] = useContext(GameContext),
+		{ config } = context,
+		{ isHit } = props,
 		colourList = ["#ff0505", "#f33aff", "#6b9cff", "#22e04f", "#ffa800"],
 		[genderNum, setGenderNum] = useState(setRandomNumberByRange(1, 3)),
 		[colourIndex, setColourIndex] = useState(setRandomNumberByRange(0, 4)),
@@ -21,7 +24,7 @@ const MoleSprite = (props: IHitState) => {
 		[tashNum, setTashNum] = useState(setRandomNumberByRange(1, 8)),
 		[mouth, setMouth] = useState(setRandomNumberByRange(1, 2)),
 		[hitMouth, setHitMouth] = useState(setRandomNumberByRange(1, 4)),
-		[holdCard, setHoldCard] = useState(setRandomNumberByRange(0, 1));
+		[cardId, setCardId] = useState(setRandomNumberByRange(0, config.range));
 
 	let isFemale = genderNum === 3, // 1 in 3 mole to be female
 		colour = isFemale ? colourList[colourIndex] : "#fdefa5";
@@ -36,7 +39,7 @@ const MoleSprite = (props: IHitState) => {
 			setTashNum(setRandomNumberByRange(1, 8));
 			setMouth(setRandomNumberByRange(1, 2));
 			setHitMouth(setRandomNumberByRange(1, 4));
-			setHoldCard(setRandomNumberByRange(0, 1));
+			setCardId(setRandomNumberByRange(0, config.range));
 		}
 	}, [isHit]);
 
@@ -65,9 +68,9 @@ const MoleSprite = (props: IHitState) => {
 				<FacialHair isFemale={isFemale} tashNum={tashNum} />
 				<Mouth isHit={isHit} isFemale={isFemale} mouth={mouth} hitMouth={hitMouth} />
 			</svg>
-			<Card type="mole" id={holdCard} marginTop="48%" />
+			<Card type="mole" id={cardId} marginTop="48%" />
 			<svg xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute" }} viewBox="0 0 195 335">
-				<Claws colour={colour} holdCard={holdCard} />
+				<Claws colour={colour} holdCard={cardId !== 0} />
 			</svg>
 		</Fragment>
 	);
