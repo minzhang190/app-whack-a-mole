@@ -44,7 +44,7 @@ const TargetCard = styled.div`
 	position: absolute;
 	width: 92%;
 	left: 4%;
-	height: 100%;
+	padding-top: 69%;
 	margin-top: 10%;
 	box-sizing: border-box;
 	border: .4rem solid black;
