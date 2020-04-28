@@ -12,8 +12,9 @@ export const Mole = (props: IProps) => {
 		[isHit, setHitState] = useState(false),
 		[isRunning, setIsRunning] = useState(true),
 		[context] = useContext(GameContext),
-		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted } = context,
+		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted, targetCardId } = context,
 		[delay, setDelay] = useState(setRandomNumberByRange(config.moleDelayLow, config.moleDelayHigh)),
+		[cardId, setCardId] = useState(setRandomNumberByRange(0, config.range)),
 		{ id, time } = props;
 
 	useInterval(
@@ -58,7 +59,13 @@ export const Mole = (props: IProps) => {
 			}
 
 			// Increase player's score
-			updateScore(playerScore + 1);
+			if (cardId === targetCardId) {
+				updateScore(playerScore + config.scoreDeltaMatch);
+			} else if (cardId > 0) {
+				updateScore(playerScore + config.scoreDeltaMismatch);
+			} else {
+				updateScore(playerScore + config.scoreDeltaNone);
+			}
 
 			// Have mole descend back underground
 			setActiveState(false);
@@ -97,7 +104,7 @@ export const Mole = (props: IProps) => {
 		<MoleLabel>
 			<MoleCheckbox type="checkbox" checked={!isActive} disabled={!isActive} />
 			<MoleBody onMouseDown={e => moleHit((e as unknown) as MouseEvent)} onTouchStart={e => moleHit((e as unknown) as TouchEvent)}>
-				<MoleSprite isHit={isHit} />
+				<MoleSprite isHit={isHit} cardId={cardId} setCardId={setCardId} />
 			</MoleBody>
 			<Stars id={id} />
 			<MolehillWrapper>

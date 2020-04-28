@@ -5,13 +5,11 @@ import { GameContext } from ".";
 import Card from "./card";
 import { MoleLabel, MoleCheckbox, MolehillWrapper } from "./mole";
 import Molehill from "./svg/molehill";
-import { setRandomNumberByRange } from "./_utils";
 
 function Target(props) {
 	const [isActive, setActiveState] = useState(false),
 		[context] = useContext(GameContext),
-		{ config, timeRemaining } = context,
-		[cardId, setCardId] = useState(setRandomNumberByRange(1, config.range)),
+		{ timeRemaining, targetCardId } = context,
 		{ time } = props;
 
 	setTimeout(() => {
@@ -27,7 +25,7 @@ function Target(props) {
 			<MoleCheckbox type="checkbox" checked={!isActive} disabled />
 			<TargetWrapper>
 				<TargetHolder />
-				<Card type="target" id={cardId} marginTop="10%" />
+				<Card type="target" id={targetCardId} marginTop="10%" />
 			</TargetWrapper>
 			<MolehillWrapper>
 				<Molehill time={time} />

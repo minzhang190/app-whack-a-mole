@@ -21,7 +21,8 @@ const GameOver = () => {
 			isHighScore,
 			setHighScoreState,
 			isFirstPlay,
-			setFirstPlayState
+			setFirstPlayState,
+			setTargetCardId
 		} = context,
 		// Randomise time delays
 		time = [0, 75, 150, 225, 300, 375, 450, 525, 600, 675, 750, 825, 900, 975, 1050, 1125, 1200]
@@ -109,6 +110,7 @@ const GameOver = () => {
 					setHighScoreState(false);
 					setFirstPlayState(false);
 					countdown(config.gameLength);
+					setTargetCardId(setRandomNumberByRange(1, config.range));
 
 					// Play replay audio
 					if (!isMuted) {
