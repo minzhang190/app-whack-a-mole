@@ -24,6 +24,7 @@ function Target(props) {
 		<MoleLabel>
 			<MoleCheckbox type="checkbox" checked={!isActive} disabled />
 			<TargetWrapper>
+				<TargetHolder />
 				<Card type="target" id={1} marginTop="10%" />
 			</TargetWrapper>
 			<MolehillWrapper>
@@ -49,6 +50,16 @@ const TargetWrapper = styled.div`
 	input:checked + & {
 		transform: translate3d(0, 100%, 0);
 	}
+`;
+
+const TargetHolder = styled.div`
+	position: absolute;
+	width: 60%;
+	left: 20%;
+	height: 100%;
+	margin-top: 10%;
+	box-sizing: border-box;
+	border: .4rem solid black;
 `;
 
 export default Target;
