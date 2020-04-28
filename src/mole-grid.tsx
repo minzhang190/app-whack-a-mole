@@ -9,9 +9,9 @@ function MoleGrid(props) {
 	const { columns } = props;
 
 	const cells = [...Array(columns * 3 - 1)].map((_, idx) =>
-		<Mole id={`mole-${idx + 1}`} time={idx / (columns * 3)} />
+		<Mole id={`mole-${idx + 1}`} time={(idx + 1) / (columns * 3)} />
 	);
-	cells.splice(Math.floor((3 * columns - 1) / 2), 0, <Target time={1 - 1 / (columns * 3)}/>);
+	cells.splice(Math.floor((3 * columns - 1) / 2), 0, <Target time={0}/>);
 
 	return (
 		<Fragment>
