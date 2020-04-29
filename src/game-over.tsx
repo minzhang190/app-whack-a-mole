@@ -125,6 +125,8 @@ const GameOver = () => {
 				<Word>
 					<Letter delay={1775}>{playerScore.toString().split("")[0]}</Letter>
 					<Letter delay={1850}>{playerScore.toString().split("")[1]}</Letter>
+					<Letter delay={1775}>{playerScore.toString().split("")[2]}</Letter>
+					<Letter delay={1850}>{playerScore.toString().split("")[3]}</Letter>
 				</Word>
 			</Scored>
 			<br />
