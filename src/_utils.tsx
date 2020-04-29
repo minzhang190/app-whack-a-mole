@@ -6,6 +6,16 @@ export function setRandomNumberByRange(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+export function randomElementByClassName(className) {
+	const elements = document.getElementsByClassName(className);
+
+	if (elements.length === 0) {
+		return null;
+	}
+
+	return elements[setRandomNumberByRange(0, elements.length - 1)];
+}
+
 // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 export function useInterval(callback: any, delay: number | null) {
 	const savedCallback: ISavedCallback = useRef();

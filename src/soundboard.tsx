@@ -43,38 +43,38 @@ const Soundboard = () => {
 				</Tickbox>
 			</MuteLabel>
 			<audio id="intro" preload="true" src={require("./../public/audio/intro.mp3")} />
-			<audio id="hit-sfx1" preload="true" src={require("./../public/audio/eee.mp3")} />
-			<audio id="hit-sfx2" preload="true" src={require("./../public/audio/eep.mp3")} />
-			<audio id="hit-sfx3" preload="true" src={require("./../public/audio/ergh.mp3")} />
-			<audio id="hit-sfx4" preload="true" src={require("./../public/audio/mummy.mp3")} />
-			<audio id="hit-sfx5" preload="true" src={require("./../public/audio/oof.mp3")} />
-			<audio id="hit-sfx6" preload="true" src={require("./../public/audio/ooo.mp3")} />
-			<audio id="hit-sfx7" preload="true" src={require("./../public/audio/ooo2.mp3")} />
-			<audio id="hit-sfx8" preload="true" src={require("./../public/audio/ouch.mp3")} />
-			<audio id="hit-sfx9" preload="true" src={require("./../public/audio/ow.mp3")} />
-			<audio id="hit-sfx10" preload="true" src={require("./../public/audio/waa.mp3")} />
-			<audio id="hit-sfx11" preload="true" src={require("./../public/audio/waa2.mp3")} />
-			<audio id="hit-sfx12" preload="true" src={require("./../public/audio/whatthe.mp3")} />
-			<audio id="hit-sfx13" preload="true" src={require("./../public/audio/ya.mp3")} />
-			<audio id="hit-sfx14" preload="true" src={require("./../public/audio/doh.mp3")} />
-			<audio id="hit-sfx15" preload="true" src={require("./../public/audio/meanie.mp3")} />
-			<audio id="hit-sfx16" preload="true" src={require("./../public/audio/ouchie.mp3")} />
-			<audio id="gameover-sfx1" preload="true" src={require("./../public/audio/enough.mp3")} />
-			<audio id="gameover-sfx2" preload="true" src={require("./../public/audio/gameoverman.mp3")} />
-			<audio id="gameover-sfx3" preload="true" src={require("./../public/audio/retreat.mp3")} />
-			<audio id="gameover-sfx4" preload="true" src={require("./../public/audio/runaway.mp3")} />
-			<audio id="gameover-sfx5" preload="true" src={require("./../public/audio/surrender.mp3")} />
-			<audio id="highscore-sfx1" preload="true" src={require("./../public/audio/congrats.mp3")} />
-			<audio id="highscore-sfx2" preload="true" src={require("./../public/audio/highscore.mp3")} />
-			<audio id="highscore-sfx3" preload="true" src={require("./../public/audio/impressive.mp3")} />
-			<audio id="highscore-sfx4" preload="true" src={require("./../public/audio/welldone.mp3")} />
-			<audio id="highscore-sfx5" preload="true" src={require("./../public/audio/woah.mp3")} />
-			<audio id="highscore-sfx6" preload="true" src={require("./../public/audio/youthebest.mp3")} />
-			<audio id="replay1" preload="true" src={require("./../public/audio/bringiton.mp3")} />
-			<audio id="replay2" preload="true" src={require("./../public/audio/gameon.mp3")} />
-			<audio id="replay3" preload="true" src={require("./../public/audio/letsdothis.mp3")} />
-			<audio id="replay4" preload="true" src={require("./../public/audio/letsgo.mp3")} />
-			<audio id="replay5" preload="true" src={require("./../public/audio/yoreadyforthis.mp3")} />
+			<audio id="hit-sfx1" className="hit-sfx" preload="true" src={require("./../public/audio/eee.mp3")} />
+			<audio id="hit-sfx2" className="hit-sfx" preload="true" src={require("./../public/audio/eep.mp3")} />
+			<audio id="hit-sfx3" className="hit-sfx" preload="true" src={require("./../public/audio/ergh.mp3")} />
+			<audio id="hit-sfx4" className="hit-sfx" preload="true" src={require("./../public/audio/mummy.mp3")} />
+			<audio id="hit-sfx5" className="hit-sfx" preload="true" src={require("./../public/audio/oof.mp3")} />
+			<audio id="hit-sfx6" className="hit-sfx" preload="true" src={require("./../public/audio/ooo.mp3")} />
+			<audio id="hit-sfx7" className="hit-sfx" preload="true" src={require("./../public/audio/ooo2.mp3")} />
+			<audio id="hit-sfx8" className="hit-sfx" preload="true" src={require("./../public/audio/ouch.mp3")} />
+			<audio id="hit-sfx9" className="hit-sfx" preload="true" src={require("./../public/audio/ow.mp3")} />
+			<audio id="hit-sfx10" className="hit-sfx" preload="true" src={require("./../public/audio/waa.mp3")} />
+			<audio id="hit-sfx11" className="hit-sfx" preload="true" src={require("./../public/audio/waa2.mp3")} />
+			<audio id="hit-sfx12" className="hit-sfx" preload="true" src={require("./../public/audio/whatthe.mp3")} />
+			<audio id="hit-sfx13" className="hit-sfx" preload="true" src={require("./../public/audio/ya.mp3")} />
+			<audio id="hit-sfx14" className="hit-sfx" preload="true" src={require("./../public/audio/doh.mp3")} />
+			<audio id="hit-sfx15" className="hit-sfx" preload="true" src={require("./../public/audio/meanie.mp3")} />
+			<audio id="hit-sfx16" className="hit-sfx" preload="true" src={require("./../public/audio/ouchie.mp3")} />
+			<audio id="gameover-sfx1" className="gameover-sfx" preload="true" src={require("./../public/audio/enough.mp3")} />
+			<audio id="gameover-sfx2" className="gameover-sfx" preload="true" src={require("./../public/audio/gameoverman.mp3")} />
+			<audio id="gameover-sfx3" className="gameover-sfx" preload="true" src={require("./../public/audio/retreat.mp3")} />
+			<audio id="gameover-sfx4" className="gameover-sfx" preload="true" src={require("./../public/audio/runaway.mp3")} />
+			<audio id="gameover-sfx5" className="gameover-sfx" preload="true" src={require("./../public/audio/surrender.mp3")} />
+			<audio id="highscore-sfx1" className="highscore-sfx" preload="true" src={require("./../public/audio/congrats.mp3")} />
+			<audio id="highscore-sfx2" className="highscore-sfx" preload="true" src={require("./../public/audio/highscore.mp3")} />
+			<audio id="highscore-sfx3" className="highscore-sfx" preload="true" src={require("./../public/audio/impressive.mp3")} />
+			<audio id="highscore-sfx4" className="highscore-sfx" preload="true" src={require("./../public/audio/welldone.mp3")} />
+			<audio id="highscore-sfx5" className="highscore-sfx" preload="true" src={require("./../public/audio/woah.mp3")} />
+			<audio id="highscore-sfx6" className="highscore-sfx" preload="true" src={require("./../public/audio/youthebest.mp3")} />
+			<audio id="replay1" className="replay" preload="true" src={require("./../public/audio/bringiton.mp3")} />
+			<audio id="replay2" className="replay" preload="true" src={require("./../public/audio/gameon.mp3")} />
+			<audio id="replay3" className="replay" preload="true" src={require("./../public/audio/letsdothis.mp3")} />
+			<audio id="replay4" className="replay" preload="true" src={require("./../public/audio/letsgo.mp3")} />
+			<audio id="replay5" className="replay" preload="true" src={require("./../public/audio/yoreadyforthis.mp3")} />
 		</Fragment>
 	);
 };

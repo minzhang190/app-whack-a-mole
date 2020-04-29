@@ -5,7 +5,7 @@ import styled, { keyframes } from "styled-components";
 import { GameContext } from ".";
 import Button from "./button";
 import { ILetter, Letter, Word } from "./title-screen";
-import { setRandomNumberByRange, initializeMoleCards } from "./_utils";
+import { setRandomNumberByRange, initializeMoleCards, randomElementByClassName } from "./_utils";
 
 const GameOver = () => {
 	const [context] = useContext(GameContext),
@@ -44,7 +44,7 @@ const GameOver = () => {
 			// Play congratulatory sound
 			if (!isMuted && !isFirstPlay) {
 				setTimeout(() => {
-					const highScoreAudio = document.getElementById(`highscore-sfx${setRandomNumberByRange(1, 6)}`) as HTMLAudioElement;
+					const highScoreAudio = randomElementByClassName("highscore-sfx") as HTMLAudioElement;
 					if (highScoreAudio) {
 						highScoreAudio.currentTime = 0;
 						highScoreAudio.play();
@@ -85,7 +85,7 @@ const GameOver = () => {
 
 		// Play replay audio
 		if (!isMuted) {
-			const replayAudio = document.getElementById(`replay${setRandomNumberByRange(1, 5)}`) as HTMLAudioElement;
+			const replayAudio = randomElementByClassName("replay") as HTMLAudioElement;
 			if (replayAudio) {
 				replayAudio.currentTime = 0;
 				replayAudio.play();

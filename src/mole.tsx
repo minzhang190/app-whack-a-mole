@@ -5,7 +5,7 @@ import { GameContext } from ".";
 import MoleSprite from "./mole-sprite";
 import Stars from "./stars";
 import Molehill from "./svg/molehill";
-import { setRandomNumberByRange, useInterval, randomMismatchingCard } from "./_utils";
+import { setRandomNumberByRange, useInterval, randomMismatchingCard, randomElementByClassName } from "./_utils";
 
 export const Mole = (props: IProps) => {
 	const [isActive, setActiveState] = useState(false),
@@ -55,7 +55,7 @@ export const Mole = (props: IProps) => {
 		// Play game over sound (just the once, not once per mole)
 		if (id === "mole-1" && !isRunning && !isMuted) {
 			setTimeout(() => {
-				const gameoverAudio = document.getElementById(`gameover-sfx${setRandomNumberByRange(1, 5)}`) as HTMLAudioElement;
+				const gameoverAudio = randomElementByClassName("gameover-sfx") as HTMLAudioElement;
 				if (gameoverAudio) {
 					gameoverAudio.currentTime = 0;
 					gameoverAudio.play();
@@ -77,7 +77,7 @@ export const Mole = (props: IProps) => {
 
 			// Audio feedback to the user they hit a mole
 			if (!isMuted) {
-				const hitAudio = document.getElementById(`hit-sfx${setRandomNumberByRange(1, 16)}`) as HTMLAudioElement;
+				const hitAudio = randomElementByClassName("hit-sfx") as HTMLAudioElement;
 				hitAudio.currentTime = 0;
 				hitAudio.play();
 			}
