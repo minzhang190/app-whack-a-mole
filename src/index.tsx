@@ -7,6 +7,7 @@ import Status from "./status";
 import Soundboard from "./soundboard";
 import TitleScreen from "./title-screen";
 import { defaultContext, IContext, localStorageAvailable, setRandomNumberByRange, initializeMoleCards } from "./_utils";
+import { ready } from "./loader";
 
 export const GameContext = createContext<[IContext]>([defaultContext]);
 const prevMutedPreference = localStorageAvailable() ? (localStorage.getItem("ismute") === "true" ? true : false) : false;
@@ -96,31 +97,20 @@ const GlobalStyle = createGlobalStyle`
 	}
 `;
 
-// Remove loader from DOM
-let loader = document.getElementById("loader");
-if (loader) {
-	loader.remove();
-	loader = null;
-}
+ready(config => {
 
-// Render our app
-const rootElement = document.getElementById("app");
-render(<Game config={{
-	title: 'Whack-a-mole!',
-	columns: 2,
-	range: 2,
-	matching: null,
-	scoreDeltaMatch: 1,
-	scoreDeltaMismatch: -1,
-	scoreDeltaNone: -2,
-	scoreThreshold: 5,
-	swapOnMatch: true,
-	holdCardRatio: 0.5,
-	gameLength: 20,
-	moleDelayLow: 1500,
-	moleDelayHigh: 1800,
-	moleSpeedUp: 0.015
-}} />, rootElement as Element);
+	// Remove loader from DOM
+	let loader = document.getElementById("loader");
+	if (loader) {
+		loader.remove();
+		loader = null;
+	}
+
+	// Render our app
+	const rootElement = document.getElementById("app");
+	render(<Game config={config} />, rootElement as Element);
+
+});
 
 // Register service worker (not on dev/serve)
 if (process.env.NODE_ENV !== "development") {
