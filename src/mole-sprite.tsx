@@ -1,8 +1,7 @@
 import { Fragment, h } from "preact";
-import { useContext, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { GameContext } from ".";
 import Card from "./card";
 import Bow from "./svg/bow";
 import Claws from "./svg/claws";
@@ -13,9 +12,7 @@ import Mouth from "./svg/mouth";
 import { IHitState, setRandomNumberByRange } from "./_utils";
 
 const MoleSprite = (props: IHitState) => {
-	const [context] = useContext(GameContext),
-		{ config, moleCardIds } = context,
-		{ id, isHit, cardId, setCardId } = props,
+	const { isHit, cardId } = props,
 		colourList = ["#ff0505", "#f33aff", "#6b9cff", "#22e04f", "#ffa800"],
 		[genderNum, setGenderNum] = useState(setRandomNumberByRange(1, 3)),
 		[colourIndex, setColourIndex] = useState(setRandomNumberByRange(0, 4)),
@@ -38,8 +35,6 @@ const MoleSprite = (props: IHitState) => {
 			setTashNum(setRandomNumberByRange(1, 8));
 			setMouth(setRandomNumberByRange(1, 2));
 			setHitMouth(setRandomNumberByRange(1, 4));
-			moleCardIds[id] = setRandomNumberByRange(0, config.range);
-			setCardId(moleCardIds[id]);
 		}
 	}, [isHit]);
 

@@ -21,7 +21,13 @@ export const Mole = (props: IProps) => {
 		() => {
 			setActiveState(!isActive);
 			setCountdownState(true);
-			!isActive ? setHitState(false) : null;
+
+			if (!isActive && isHit) {
+				setHitState(false);
+
+				moleCardIds[id] = setRandomNumberByRange(0, config.range);
+				setCardId(moleCardIds[id]);
+			}
 		},
 		isRunning ? delay : null
 	);
@@ -110,7 +116,7 @@ export const Mole = (props: IProps) => {
 		<MoleLabel>
 			<MoleCheckbox type="checkbox" checked={!isActive} disabled={!isActive} />
 			<MoleBody onMouseDown={e => moleHit((e as unknown) as MouseEvent)} onTouchStart={e => moleHit((e as unknown) as TouchEvent)}>
-				<MoleSprite id={id} isHit={isHit} cardId={cardId} setCardId={setCardId} />
+				<MoleSprite isHit={isHit} cardId={cardId} />
 			</MoleBody>
 			<Stars id={id} />
 			<MolehillWrapper>
