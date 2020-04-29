@@ -70,13 +70,13 @@ const GameOver = () => {
 			</HighScore>
 		) : null;
 
-	function play(useConfig) {
+	function play(firstPlay, useConfig) {
 		useConfig = useConfig || config;
 
 		updateScore(0);
 		setGameOverState(false);
 		setHighScoreState(false);
-		setFirstPlayState(false);
+		setFirstPlayState(firstPlay);
 		countdown(useConfig.gameLength);
 
 		const targetCardId = setRandomNumberByRange(1, useConfig.range);
@@ -134,7 +134,7 @@ const GameOver = () => {
 			<br />
 			<Button
 				label="Again"
-				event={() => play()}
+				event={() => play(false)}
 				btnDelay={2000}
 			/>
 			{playerScore >= config.scoreThreshold && configIndex < configurations.length - 1 ? (
@@ -142,7 +142,8 @@ const GameOver = () => {
 					const newConfig = configurations[configIndex + 1];
 					setConfig(newConfig);
 					setConfigIndex(configIndex + 1);
-					play(newConfig);
+					updateHighScore(0);
+					play(true, newConfig);
 				}} btnDelay={2000} />
 			) : null}
 		</GameOverMan>
