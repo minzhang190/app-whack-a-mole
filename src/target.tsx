@@ -29,7 +29,12 @@ function Target(props) {
 				}
 
 				setActiveState(true);
-				setTargetCardId(setRandomNumberByRange(1, config.range));
+
+				let nextTargetCardId = 0;
+				do {
+					nextTargetCardId = setRandomNumberByRange(1, config.range);
+				} while (config.range > 1 && nextTargetCardId === cardId);
+				setTargetCardId(nextTargetCardId);
 			}, 1000);
 		} else {
 			setCardId(targetCardId);
