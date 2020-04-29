@@ -26,7 +26,7 @@ function Game(props) {
 		[isHighScore, setHighScoreState] = useState(false);
 
 	// Determine what to render
-	const output = showTitleScreen ? <TitleScreen /> : isGameOver ? <GameOver /> : <MoleGrid columns={config.columns}/>;
+	const output = showTitleScreen ? <TitleScreen /> : isGameOver ? <GameOver /> : <MoleGrid />;
 
 	return (
 		<GameContext.Provider

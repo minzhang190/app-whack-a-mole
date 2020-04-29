@@ -1,12 +1,16 @@
 import { Fragment, h } from "preact";
+import { useContext } from "preact/hooks";
 import styled from "styled-components";
+import { GameContext } from ".";
 import Clock from "./clock";
 import { Mole } from "./mole";
 import Target from "./target";
 import { Scoreboard } from "./scoreboard";
 
-function MoleGrid(props) {
-	const { columns } = props;
+function MoleGrid() {
+	const [context] = useContext(GameContext),
+		{ config } = context,
+		{ columns } = config;
 
 	const cells = [...Array(columns * 3 - 1)].map((_, idx) =>
 		<Mole id={`mole-${idx + 1}`} time={(idx + 1) / (columns * 3)} />
