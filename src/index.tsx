@@ -6,7 +6,7 @@ import MoleGrid from "./mole-grid";
 import Status from "./status";
 import Soundboard from "./soundboard";
 import TitleScreen from "./title-screen";
-import { defaultContext, IContext, localStorageAvailable, setRandomNumberByRange } from "./_utils";
+import { defaultContext, IContext, localStorageAvailable, setRandomNumberByRange, initializeMoleCards } from "./_utils";
 
 export const GameContext = createContext<[IContext]>([defaultContext]);
 const prevMutedPreference = localStorageAvailable() ? (localStorage.getItem("ismute") === "true" ? true : false) : false;
@@ -15,7 +15,7 @@ function Game(props) {
 	// Set our states
 	const [config, setConfig] = useState(props.config),
 		[targetCardId, setTargetCardId] = useState(setRandomNumberByRange(1, config.range)),
-		[moleCardIds, setMoleCardIds] = useState({}),
+		[moleCardIds, setMoleCardIds] = useState(initializeMoleCards(config, targetCardId)),
 		[showTitleScreen, disableTitleScreen] = useState(true),
 		[timeRemaining, countdown] = useState(config.gameLength),
 		[playerScore, updateScore] = useState(0),
@@ -107,6 +107,7 @@ render(<Game config={{
 	scoreDeltaMismatch: -1,
 	scoreDeltaNone: -2,
 	swapOnMatch: true,
+	holdCardRatio: 0.5,
 	gameLength: 20,
 	moleDelayLow: 1500,
 	moleDelayHigh: 1800,

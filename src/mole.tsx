@@ -5,7 +5,7 @@ import { GameContext } from ".";
 import MoleSprite from "./mole-sprite";
 import Stars from "./stars";
 import Molehill from "./svg/molehill";
-import { setRandomNumberByRange, useInterval } from "./_utils";
+import { setRandomNumberByRange, useInterval, randomMismatchingCard } from "./_utils";
 
 export const Mole = (props: IProps) => {
 	const [isActive, setActiveState] = useState(false),
@@ -14,19 +14,34 @@ export const Mole = (props: IProps) => {
 		[context] = useContext(GameContext),
 		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted, targetCardId, setTargetCardId, moleCardIds } = context,
 		[delay, setDelay] = useState(setRandomNumberByRange(config.moleDelayLow, config.moleDelayHigh)),
-		[cardId, setCardId] = useState(setRandomNumberByRange(0, config.range)),
-		{ id, time } = props;
+		{ id, time } = props,
+		[cardId, setCardId] = useState(moleCardIds[id]);
 
 	useInterval(
 		() => {
 			setActiveState(!isActive);
 			setCountdownState(true);
 
-			if (!isActive && isHit) {
-				setHitState(false);
+			if (!isActive) {
+				if (isHit) {
+					setHitState(false);
 
-				moleCardIds[id] = setRandomNumberByRange(0, config.range);
-				setCardId(moleCardIds[id]);
+					moleCardIds[id] = randomMismatchingCard(config, targetCardId);
+					setCardId(moleCardIds[id]);
+				} else if (targetCardId !== -1) {
+					let hasTarget = false;
+
+					for (let [moleId, moleCardId] of Object.entries(moleCardIds)) {
+						if (moleCardId === targetCardId) {
+							hasTarget = true;
+						}
+					}
+
+					if (!hasTarget) {
+						moleCardIds[id] = targetCardId;
+						setCardId(targetCardId);
+					}
+				}
 			}
 		},
 		isRunning ? delay : null

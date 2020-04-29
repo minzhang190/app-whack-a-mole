@@ -41,6 +41,34 @@ export function localStorageAvailable(): boolean {
 	}
 }
 
+export function randomMismatchingCard(config, targetCardId) {
+	let result = 0;
+
+	if (config.range > 1 && Math.random() < config.holdCardRatio) {
+		do {
+			result = setRandomNumberByRange(1, config.range);
+		} while (result === targetCardId);
+	}
+
+	return result;
+}
+
+export function initializeMoleCards(config, targetCardId) {
+	const moleCardIds = {};
+
+	moleCardIds[`mole-${setRandomNumberByRange(1, config.columns * 3 - 1)}`] = targetCardId;
+
+	for (let i = 1; i <= config.columns * 3 - 1; i++) {
+		if (moleCardIds[`mole-${i}`]) {
+			continue;
+		}
+
+		moleCardIds[`mole-${i}`] = randomMismatchingCard(config, targetCardId);
+	}
+
+	return moleCardIds;
+}
+
 interface ISavedCallback {
 	current?: Function;
 }

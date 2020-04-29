@@ -5,7 +5,7 @@ import styled, { keyframes } from "styled-components";
 import { GameContext } from ".";
 import Button from "./button";
 import { ILetter, Letter, Word } from "./title-screen";
-import { setRandomNumberByRange } from "./_utils";
+import { setRandomNumberByRange, initializeMoleCards } from "./_utils";
 
 const GameOver = () => {
 	const [context] = useContext(GameContext),
@@ -111,8 +111,10 @@ const GameOver = () => {
 					setHighScoreState(false);
 					setFirstPlayState(false);
 					countdown(config.gameLength);
-					setTargetCardId(setRandomNumberByRange(1, config.range));
-					setMoleCardIds({});
+
+					const targetCardId = setRandomNumberByRange(1, config.range);
+					setTargetCardId(targetCardId);
+					setMoleCardIds(initializeMoleCards(config, targetCardId));
 
 					// Play replay audio
 					if (!isMuted) {
