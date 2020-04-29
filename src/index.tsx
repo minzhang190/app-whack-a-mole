@@ -12,8 +12,11 @@ export const GameContext = createContext<[IContext]>([defaultContext]);
 const prevMutedPreference = localStorageAvailable() ? (localStorage.getItem("ismute") === "true" ? true : false) : false;
 
 function Game(props) {
+	const configurations = Array.isArray(props.config) ? props.config : [props.config];
+
 	// Set our states
-	const [config, setConfig] = useState(props.config),
+	const [configIndex, setConfigIndex] = useState(0),
+		[config, setConfig] = useState(configurations[configIndex]),
 		[targetCardId, setTargetCardId] = useState(setRandomNumberByRange(1, config.range)),
 		[moleCardIds, setMoleCardIds] = useState(initializeMoleCards(config, targetCardId)),
 		[showTitleScreen, disableTitleScreen] = useState(true),
@@ -34,6 +37,8 @@ function Game(props) {
 			value={[
 				{
 					config,
+					configIndex,
+					configurations,
 					countdown,
 					disableTitleScreen,
 					isCountdownActive,
@@ -44,6 +49,8 @@ function Game(props) {
 					moleCardIds,
 					playerHighScore,
 					playerScore,
+					setConfig,
+					setConfigIndex,
 					setCountdownState,
 					setFirstPlayState,
 					setGameOverState,
@@ -106,6 +113,7 @@ render(<Game config={{
 	scoreDeltaMatch: 1,
 	scoreDeltaMismatch: -1,
 	scoreDeltaNone: -2,
+	scoreThreshold: 5,
 	swapOnMatch: true,
 	holdCardRatio: 0.5,
 	gameLength: 20,

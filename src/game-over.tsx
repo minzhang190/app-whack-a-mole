@@ -11,6 +11,10 @@ const GameOver = () => {
 	const [context] = useContext(GameContext),
 		{
 			config,
+			setConfig,
+			configIndex,
+			setConfigIndex,
+			configurations,
 			playerScore,
 			updateScore,
 			setGameOverState,
@@ -66,6 +70,29 @@ const GameOver = () => {
 			</HighScore>
 		) : null;
 
+	function play(useConfig) {
+		useConfig = useConfig || config;
+
+		updateScore(0);
+		setGameOverState(false);
+		setHighScoreState(false);
+		setFirstPlayState(false);
+		countdown(useConfig.gameLength);
+
+		const targetCardId = setRandomNumberByRange(1, useConfig.range);
+		setTargetCardId(targetCardId);
+		setMoleCardIds(initializeMoleCards(useConfig, targetCardId));
+
+		// Play replay audio
+		if (!isMuted) {
+			const replayAudio = document.getElementById(`replay${setRandomNumberByRange(1, 5)}`) as HTMLAudioElement;
+			if (replayAudio) {
+				replayAudio.currentTime = 0;
+				replayAudio.play();
+			}
+		}
+	}
+
 	return (
 		<GameOverMan>
 			<Word>
@@ -105,28 +132,17 @@ const GameOver = () => {
 			<br />
 			<Button
 				label="Again"
-				event={() => {
-					updateScore(0);
-					setGameOverState(false);
-					setHighScoreState(false);
-					setFirstPlayState(false);
-					countdown(config.gameLength);
-
-					const targetCardId = setRandomNumberByRange(1, config.range);
-					setTargetCardId(targetCardId);
-					setMoleCardIds(initializeMoleCards(config, targetCardId));
-
-					// Play replay audio
-					if (!isMuted) {
-						const replayAudio = document.getElementById(`replay${setRandomNumberByRange(1, 5)}`) as HTMLAudioElement;
-						if (replayAudio) {
-							replayAudio.currentTime = 0;
-							replayAudio.play();
-						}
-					}
-				}}
+				event={() => play()}
 				btnDelay={2000}
 			/>
+			{playerScore >= config.scoreThreshold && configIndex < configurations.length - 1 ? (
+				<Button label="Next" event={() => {
+					const newConfig = configurations[configIndex + 1];
+					setConfig(newConfig);
+					setConfigIndex(configIndex + 1);
+					play(newConfig);
+				}} btnDelay={2000} />
+			) : null}
 		</GameOverMan>
 	);
 };
