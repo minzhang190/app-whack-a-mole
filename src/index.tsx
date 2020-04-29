@@ -100,6 +100,7 @@ render(<Game config={{
 	scoreDeltaMatch: 1,
 	scoreDeltaMismatch: -1,
 	scoreDeltaNone: -2,
+	swapOnMatch: true,
 	gameLength: 20,
 	moleDelayLow: 1500,
 	moleDelayHigh: 1800,

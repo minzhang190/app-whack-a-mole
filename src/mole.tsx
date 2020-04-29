@@ -61,7 +61,9 @@ export const Mole = (props: IProps) => {
 			// Increase player's score
 			if (cardId === targetCardId) {
 				updateScore(playerScore + config.scoreDeltaMatch);
-				setTargetCardId(-1);
+				if (config.swapOnMatch) {
+					setTargetCardId(-1);
+				}
 			} else if (cardId > 0) {
 				updateScore(playerScore + config.scoreDeltaMismatch);
 			} else {
