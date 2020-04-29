@@ -52,10 +52,25 @@ function Target(props) {
 		setActiveState(false);
 	}
 
+	// Player has hit the target
+	function targetHit(e: MouseEvent | TouchEvent) {
+		// Prevent click/tap spamming
+		if (isActive) {
+			// Audio feedback to the user
+			if (!isMuted) {
+				const targetCardAudio = randomElementByClassName(`card-target-${cardId}`) as HTMLAudioElement;
+				if (targetCardAudio) {
+					targetCardAudio.currentTime = 0;
+					targetCardAudio.play();
+				}
+			}
+		}
+	}
+
 	return (
 		<MoleLabel>
 			<MoleCheckbox type="checkbox" checked={!isActive} disabled />
-			<TargetWrapper>
+			<TargetWrapper onMouseDown={e => targetHit((e as unknown) as MouseEvent)} onTouchStart={e => targetHit((e as unknown) as TouchEvent)}>
 				<TargetHolder />
 				<Card type="target" id={cardId} marginTop="10%" />
 			</TargetWrapper>
