@@ -5,13 +5,13 @@ import { GameContext } from ".";
 import Card from "./card";
 import { MoleLabel, MoleCheckbox, MolehillWrapper } from "./mole";
 import Molehill from "./svg/molehill";
-import { setRandomNumberByRange } from "./_utils";
+import { setRandomNumberByRange, randomElementByClassName } from "./_utils";
 
 function Target(props) {
 	const [isActive, setActiveState] = useState(false),
 		[cardId, setCardId] = useState(0),
 		[context] = useContext(GameContext),
-		{ config, timeRemaining, targetCardId, setTargetCardId } = context,
+		{ config, timeRemaining, targetCardId, setTargetCardId, isMuted } = context,
 		{ time } = props;
 
 	useEffect(() => {
@@ -33,6 +33,13 @@ function Target(props) {
 			}, 1000);
 		} else {
 			setCardId(targetCardId);
+			if (!isMuted) {
+				const targetCardAudio = randomElementByClassName(`card-target-${targetCardId}`) as HTMLAudioElement;
+				if (targetCardAudio) {
+					targetCardAudio.currentTime = 0;
+					targetCardAudio.play();
+				}
+			}
 		}
 	}, [targetCardId]);
 

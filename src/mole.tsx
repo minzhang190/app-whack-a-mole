@@ -77,7 +77,10 @@ export const Mole = (props: IProps) => {
 
 			// Audio feedback to the user they hit a mole
 			if (!isMuted) {
-				const hitAudio = randomElementByClassName("hit-sfx") as HTMLAudioElement;
+				let hitAudio = randomElementByClassName(`card-mole-${cardId}`) as HTMLAudioElement;
+				if (!hitAudio || cardId !== targetCardId) {
+					hitAudio = randomElementByClassName("hit-sfx") as HTMLAudioElement;
+				}
 				hitAudio.currentTime = 0;
 				hitAudio.play();
 			}
