@@ -49,11 +49,10 @@ export const Mole = (props: IProps) => {
 
 	// Hide all moles for good when time is up
 	if (timeRemaining === 0) {
-		setIsRunning(false);
 		setActiveState(false);
 
 		// Play game over sound (just the once, not once per mole)
-		if (id === "mole-1" && !isRunning && !isMuted) {
+		if (id === "mole-1" && isRunning && !isMuted) {
 			setTimeout(() => {
 				const gameoverAudio = randomElementByClassName("gameover-sfx") as HTMLAudioElement;
 				if (gameoverAudio) {
@@ -61,6 +60,10 @@ export const Mole = (props: IProps) => {
 					gameoverAudio.play();
 				}
 			}, 300);
+		}
+
+		if (id === "mole-1") {
+			setIsRunning(false);
 		}
 	}
 
