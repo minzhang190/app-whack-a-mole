@@ -24,7 +24,7 @@ const Frame = styled.div`
 	padding-top: 69%;
 	box-sizing: border-box;
 	border: .4rem solid black;
-	background: white top/80% no-repeat;
+	background: white center/90% no-repeat;
 `;
 
 const Text = styled.div`
