@@ -3,6 +3,7 @@ import { useState } from "preact/hooks";
 import { createGlobalStyle } from "styled-components";
 import GameOver from "./game-over";
 import MoleGrid from "./mole-grid";
+import Status from "./status";
 import Soundboard from "./soundboard";
 import TitleScreen from "./title-screen";
 import { defaultContext, IContext, localStorageAvailable, setRandomNumberByRange } from "./_utils";
@@ -56,6 +57,7 @@ function Game(props) {
 		>
 			<GlobalStyle />
 			{output}
+			{showTitleScreen ? null : <Status />}
 			<Soundboard />
 		</GameContext.Provider>
 	);
@@ -94,6 +96,7 @@ if (loader) {
 // Render our app
 const rootElement = document.getElementById("app");
 render(<Game config={{
+	title: 'Whack-a-mole!',
 	columns: 2,
 	range: 2,
 	matching: null,
