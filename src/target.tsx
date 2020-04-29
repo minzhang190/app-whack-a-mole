@@ -1,20 +1,40 @@
 import { h } from "preact";
-import { useContext, useState } from "preact/hooks";
+import { useContext, useState, useEffect } from "preact/hooks";
 import styled from "styled-components";
 import { GameContext } from ".";
 import Card from "./card";
 import { MoleLabel, MoleCheckbox, MolehillWrapper } from "./mole";
 import Molehill from "./svg/molehill";
+import { setRandomNumberByRange } from "./_utils";
 
 function Target(props) {
 	const [isActive, setActiveState] = useState(false),
+		[cardId, setCardId] = useState(0),
 		[context] = useContext(GameContext),
-		{ timeRemaining, targetCardId } = context,
+		{ config, timeRemaining, targetCardId, setTargetCardId } = context,
 		{ time } = props;
 
-	setTimeout(() => {
-		setActiveState(true);
-	}, (time + 1) * 1000);
+	useEffect(() => {
+		setTimeout(() => {
+			setActiveState(true);
+		}, (time + 1) * 1000);
+	}, []);
+
+	useEffect(() => {
+		if (targetCardId < 0) { // Was set inactive by other components
+			setActiveState(false);
+			setTimeout(() => {
+				if (timeRemaining === 0) {
+					return;
+				}
+
+				setActiveState(true);
+				setTargetCardId(setRandomNumberByRange(1, config.range));
+			}, 1000);
+		} else {
+			setCardId(targetCardId);
+		}
+	}, [targetCardId]);
 
 	if (timeRemaining === 0) {
 		setActiveState(false);
@@ -25,7 +45,7 @@ function Target(props) {
 			<MoleCheckbox type="checkbox" checked={!isActive} disabled />
 			<TargetWrapper>
 				<TargetHolder />
-				<Card type="target" id={targetCardId} marginTop="10%" />
+				<Card type="target" id={cardId} marginTop="10%" />
 			</TargetWrapper>
 			<MolehillWrapper>
 				<Molehill time={time} />

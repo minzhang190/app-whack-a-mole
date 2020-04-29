@@ -12,7 +12,7 @@ export const Mole = (props: IProps) => {
 		[isHit, setHitState] = useState(false),
 		[isRunning, setIsRunning] = useState(true),
 		[context] = useContext(GameContext),
-		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted, targetCardId } = context,
+		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted, targetCardId, setTargetCardId } = context,
 		[delay, setDelay] = useState(setRandomNumberByRange(config.moleDelayLow, config.moleDelayHigh)),
 		[cardId, setCardId] = useState(setRandomNumberByRange(0, config.range)),
 		{ id, time } = props;
@@ -61,6 +61,7 @@ export const Mole = (props: IProps) => {
 			// Increase player's score
 			if (cardId === targetCardId) {
 				updateScore(playerScore + config.scoreDeltaMatch);
+				setTargetCardId(-1);
 			} else if (cardId > 0) {
 				updateScore(playerScore + config.scoreDeltaMismatch);
 			} else {
