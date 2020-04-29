@@ -14,8 +14,8 @@ import { IHitState, setRandomNumberByRange } from "./_utils";
 
 const MoleSprite = (props: IHitState) => {
 	const [context] = useContext(GameContext),
-		{ config } = context,
-		{ isHit, cardId, setCardId } = props,
+		{ config, moleCardIds } = context,
+		{ id, isHit, cardId, setCardId } = props,
 		colourList = ["#ff0505", "#f33aff", "#6b9cff", "#22e04f", "#ffa800"],
 		[genderNum, setGenderNum] = useState(setRandomNumberByRange(1, 3)),
 		[colourIndex, setColourIndex] = useState(setRandomNumberByRange(0, 4)),
@@ -38,7 +38,8 @@ const MoleSprite = (props: IHitState) => {
 			setTashNum(setRandomNumberByRange(1, 8));
 			setMouth(setRandomNumberByRange(1, 2));
 			setHitMouth(setRandomNumberByRange(1, 4));
-			setCardId(setRandomNumberByRange(0, config.range));
+			moleCardIds[id] = setRandomNumberByRange(0, config.range);
+			setCardId(moleCardIds[id]);
 		}
 	}, [isHit]);
 

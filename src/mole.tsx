@@ -12,7 +12,7 @@ export const Mole = (props: IProps) => {
 		[isHit, setHitState] = useState(false),
 		[isRunning, setIsRunning] = useState(true),
 		[context] = useContext(GameContext),
-		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted, targetCardId, setTargetCardId } = context,
+		{ config, timeRemaining, playerScore, updateScore, setCountdownState, isMuted, targetCardId, setTargetCardId, moleCardIds } = context,
 		[delay, setDelay] = useState(setRandomNumberByRange(config.moleDelayLow, config.moleDelayHigh)),
 		[cardId, setCardId] = useState(setRandomNumberByRange(0, config.range)),
 		{ id, time } = props;
@@ -50,6 +50,9 @@ export const Mole = (props: IProps) => {
 			// Visual feedback to user they hit a mole
 			setHitState(true);
 			showStars(e);
+
+			// Card ID will be recalculated when this mole re-emerges. Set the global registry to -1 before that.
+			moleCardIds[id] = -1;
 
 			// Audio feedback to the user they hit a mole
 			if (!isMuted) {
@@ -107,7 +110,7 @@ export const Mole = (props: IProps) => {
 		<MoleLabel>
 			<MoleCheckbox type="checkbox" checked={!isActive} disabled={!isActive} />
 			<MoleBody onMouseDown={e => moleHit((e as unknown) as MouseEvent)} onTouchStart={e => moleHit((e as unknown) as TouchEvent)}>
-				<MoleSprite isHit={isHit} cardId={cardId} setCardId={setCardId} />
+				<MoleSprite id={id} isHit={isHit} cardId={cardId} setCardId={setCardId} />
 			</MoleBody>
 			<Stars id={id} />
 			<MolehillWrapper>
