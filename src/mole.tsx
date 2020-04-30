@@ -28,7 +28,7 @@ export const Mole = (props: IProps) => {
 
 					moleCardIds[id] = randomMismatchingCard(config, targetCardId);
 					setCardId(moleCardIds[id]);
-				} else if (targetCardId !== -1) {
+				} else if (targetCardId >= 0) {
 					let hasTarget = false;
 
 					for (let [moleId, moleCardId] of Object.entries(moleCardIds)) {
@@ -81,7 +81,7 @@ export const Mole = (props: IProps) => {
 			// Audio feedback to the user they hit a mole
 			if (!isMuted) {
 				let hitAudio = randomElementByClassName(`card-mole-${cardId}`) as HTMLAudioElement;
-				if (!hitAudio || cardId !== targetCardId) {
+				if (!hitAudio || cardId !== Math.abs(targetCardId)) {
 					hitAudio = randomElementByClassName("hit-sfx") as HTMLAudioElement;
 				}
 				hitAudio.currentTime = 0;
@@ -89,10 +89,10 @@ export const Mole = (props: IProps) => {
 			}
 
 			// Increase player's score
-			if (cardId === targetCardId) {
+			if (cardId === Math.abs(targetCardId)) {
 				updateScore(playerScore + config.scoreDeltaMatch);
-				if (config.swapOnMatch) {
-					setTargetCardId(-1);
+				if (config.swapOnMatch && targetCardId >= 0) {
+					setTargetCardId(-cardId);
 				}
 			} else if (cardId > 0) {
 				updateScore(playerScore + config.scoreDeltaMismatch);
