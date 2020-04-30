@@ -9,7 +9,7 @@ import { Scoreboard } from "./scoreboard";
 
 function MoleGrid() {
 	const [context] = useContext(GameContext),
-		{ config } = context,
+		{ config, configIndex } = context,
 		{ columns } = config;
 
 	const cells = [...Array(columns * 3 - 1)].map((_, idx) =>
@@ -21,7 +21,8 @@ function MoleGrid() {
 		<Fragment>
 			<Clock />
 			<Scoreboard />
-			<GridArea style={{ 'grid-template-columns': '1fr '.repeat(columns) }}>
+			<GridArea className={`config-${configIndex + 1}`}
+					style={{ 'grid-template-columns': '1fr '.repeat(columns) }}>
 				{cells}
 			</GridArea>
 		</Fragment>
