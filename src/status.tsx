@@ -15,6 +15,8 @@ const TitleText = styled.div`
 	padding: 0.5rem 1rem;
 	grid-column: 1;
 	grid-row: 3;
+	white-space: nowrap;
+	overflow: hidden;
 `;
 
 export default Status;

@@ -84,10 +84,10 @@ function Target(props) {
 const TargetWrapper = styled.div`
 	position: relative;
 	height: 100%;
-	max-width: calc(24vh - 1rem);
-	min-width: calc(16vh - 1rem);
+	max-width: calc(24vh - 1.6rem);
+	min-width: calc(16vh - 1.6rem);
 	overflow: hidden;
-	width: calc(15vw + 10vh - 1rem);
+	width: calc(15vw + 10vh - 1.6rem);
 
 	input + & {
 		transform: translate3d(0, 0, 0);
@@ -106,7 +106,7 @@ const TargetHolder = styled.div`
 	height: 100%;
 	margin-top: 10%;
 	box-sizing: border-box;
-	border: calc(1vh - .05rem) solid black;
+	border: calc(1vh - .08rem) solid black;
 `;
 
 export default Target;
