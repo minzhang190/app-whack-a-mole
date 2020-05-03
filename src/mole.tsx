@@ -171,13 +171,13 @@ export const MoleCheckbox = styled.input`
 
 const MoleBody = styled.div`
 	background: radial-gradient(#767676, #525252);
-	border-radius: 10vh 10vh 0 0;
+	border-radius: calc(10vh - .5rem) calc(10vh - .5rem) 0 0;
 	cursor: pointer;
 	height: 100%;
-	max-width: 24vh;
-	min-width: 16vh;
+	max-width: calc(24vh - 1rem);
+	min-width: calc(16vh - 1rem);
 	overflow: hidden;
-	width: calc(15vw + 10vh);
+	width: calc(15vw + 10vh - 1rem);
 
 	input + & {
 		transform: translate3d(0, 0, 0);
