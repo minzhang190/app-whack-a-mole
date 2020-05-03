@@ -63,7 +63,7 @@ const MoleSprite = (props: IHitState) => {
 				<FacialHair isFemale={isFemale} tashNum={tashNum} />
 				<Mouth isHit={isHit} isFemale={isFemale} mouth={mouth} hitMouth={hitMouth} />
 			</svg>
-			<Card type="mole" id={cardId} marginTop="48%" />
+			<Card type="mole" id={cardId} marginTop="40%" />
 			<svg xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute" }} viewBox="0 0 195 335">
 				<Claws colour={colour} holdCard={cardId !== 0} />
 			</svg>

@@ -23,7 +23,7 @@ const Frame = styled.div`
 	left: 4%;
 	padding-top: 69%;
 	box-sizing: border-box;
-	border: .4rem solid black;
+	border: 1vh solid black;
 	background: white center/90% no-repeat;
 `;
 
