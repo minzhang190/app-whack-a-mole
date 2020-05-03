@@ -1,0 +1,91 @@
+.card-1 {
+  background-image: url(apple.jpg);
+}
+.card-2 {
+  background-image: url(fig.jpg);
+}
+.card-3 {
+  background-image: url(grape.jpg);
+}
+.card-4 {
+  background-image: url(kiwi.jpg);
+}
+.card-5 {
+  background-image: url(lemon.jpg);
+}
+.card-6 {
+  background-image: url(lime.jpg);
+}
+.card-7 {
+  background-image: url(mango.jpg);
+}
+.card-8 {
+  background-image: url(melon.jpg);
+}
+.card-9 {
+  background-image: url(orange.jpg);
+}
+.card-10 {
+  background-image: url(peach.jpg);
+}
+.card-11 {
+  background-image: url(pear.jpg);
+}
+.card-12 {
+  background-image: url(pinapple.jpg);
+}
+.card-13 {
+  background-image: url(plum.jpg);
+}
+.card-14 {
+  background-image: url(raspberry.jpg);
+}
+.card-15 {
+  background-image: url(strawberry.jpg);
+}
+
+.matching.card-1 {
+  background-image: url(apple.png);
+}
+.matching.card-2 {
+  background-image: url(fig.png);
+}
+.matching.card-3 {
+  background-image: url(grape.png);
+}
+.matching.card-4 {
+  background-image: url(kiwi.png);
+}
+.matching.card-5 {
+  background-image: url(lemon.png);
+}
+.matching.card-6 {
+  background-image: url(lime.png);
+}
+.matching.card-7 {
+  background-image: url(mango.png);
+}
+.matching.card-8 {
+  background-image: url(melon.png);
+}
+.matching.card-9 {
+  background-image: url(orange.png);
+}
+.matching.card-10 {
+  background-image: url(peach.png);
+}
+.matching.card-11 {
+  background-image: url(pear.png);
+}
+.matching.card-12 {
+  background-image: url(pinapple.png);
+}
+.matching.card-13 {
+  background-image: url(plum.png);
+}
+.matching.card-14 {
+  background-image: url(raspberry.png);
+}
+.matching.card-15 {
+  background-image: url(strawberry.png);
+}
